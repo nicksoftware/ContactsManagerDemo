@@ -18,7 +18,7 @@ namespace DSW03A1
       
         static void Main(string[] args)
         {
-            Loader();
+            Loader(2,50);
             Console.Clear();
             Console.WriteLine("Welcome to my Contact Application");
             DrawSeparator(50);
@@ -26,16 +26,7 @@ namespace DSW03A1
             bool isNotExit = true;
             do
             {
-                Console.ForegroundColor = ConsoleColor.White;
-
-                Console.WriteLine("Choose an option below :\n");
-                Console.WriteLine("A) View all contacts \n" +
-                                  "B) Search contact+\n" +
-                                  "C) Display Contact by ID");
-
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("D) Exit Program");
-                Console.ForegroundColor = ConsoleColor.White;
+                DisplayOptions();
 
                 char userOption =Convert.ToChar(Console.ReadLine().Trim().ToLower().First());
 
@@ -61,6 +52,8 @@ namespace DSW03A1
             {
                 case 'a':
                     Console.Clear();
+                    Loader(5,20);
+                    Console.Clear();
                     var contacts = viewModel.DisplayAllContacts();
 
                     foreach(var contact in contacts)
@@ -70,6 +63,8 @@ namespace DSW03A1
                     break;
                 case 'b':
                     {
+                        Console.Clear();
+                        Loader(5, 20);
                         Console.Clear();
                         Console.WriteLine("Enter user firstName");
                         var username = Console.ReadLine();
@@ -81,6 +76,8 @@ namespace DSW03A1
                         break;
                     }
                 case'c':
+                    Console.Clear();
+                    Loader(5, 20);
                     Console.Clear();
                     Console.WriteLine("Enter Contact ID");
                     var usernameId = Convert.ToInt32(Console.ReadLine());
@@ -96,21 +93,37 @@ namespace DSW03A1
             }
         }
 
+        static void DisplayOptions()
+        {
+            Console.ForegroundColor = ConsoleColor.White;
 
-        static void Loader()
+            Console.WriteLine("Choose an option below :\n");
+            Console.WriteLine("A) View all contacts \n" +
+                              "B) Search contact+\n" +
+                              "C) Display Contact by ID");
+
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("D) Exit Program");
+            Console.ForegroundColor = ConsoleColor.White;
+
+        }
+        static void Loader(int repeats,int loadSpeed)
         {
             var rand = new Random();
-            for(var x = 0; x<5; x++)
+            Console.WriteLine("\n\n\n\n\n");
+            for(var x = 0; x< repeats; x++)
             {
                 for (var y= 0;y <4;y++)
                 {
-                    Console.Write("*");
-                    Thread.Sleep(2);
+                    Console.Write("\t*");
+                    Thread.Sleep(loadSpeed);
                     
                 }
+                Console.WriteLine();
                 Console.ForegroundColor =(ConsoleColor) rand.Next(0, 14);
 
             }
+            Console.ForegroundColor = ConsoleColor.White;
         }
         static void DrawSeparator(int length)
         {
